@@ -83,15 +83,15 @@ WSGI_APPLICATION = 'backend_api.wsgi.application'
 #     }
 # }
 
-DATABASES = 'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@mainline.proxy.rlwy.net:39208/railway'
+# DATABASES = 'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@mainline.proxy.rlwy.net:39208/railway'
 
-# DATABASES = {
-#     'default': dj_database_url.parse(
-#         'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@postgres.railway.internal:5432/railway',
-#         conn_max_age=600,
-#         ssl_require=True
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.parse(
+        'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@postgres.railway.internal:5432/railway',
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
