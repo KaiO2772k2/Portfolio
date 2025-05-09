@@ -1,4 +1,6 @@
 env
+
+
 **/__pycache__/
 
 node_modules/
@@ -44,4 +46,11 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-*.__pycache__
+**/__pycache__/
+
+# /Hope_Horizon_api
+backend_api/.env
+# backend_api/static
+backend_api/media
+backend_api/protected
+backend_api/*/migrations/
