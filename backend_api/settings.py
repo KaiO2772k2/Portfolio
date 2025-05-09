@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'backend_api.wsgi.application'
 #     }
 # }
 
-DATABASE_URL = 'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@mainline.proxy.rlwy.net:39208/railway'
+DATABASES = 'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@mainline.proxy.rlwy.net:39208/railway'
 
 # DATABASES = {
 #     'default': dj_database_url.parse(
