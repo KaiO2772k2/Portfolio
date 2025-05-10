@@ -17,7 +17,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             return Project.objects.create(
                 name=name,
                 image=image,
-                description=description
+                description=description,
                 link=link
             )
         except Exception as error:
