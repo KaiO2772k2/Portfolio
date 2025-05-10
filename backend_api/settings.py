@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#ukw3*ar($+=dk&v_qa86i)l530&mg600(#_k5e!qwqyjoe^rw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "api-cv-tranvannghia.up.railway.app"]
 
 
 # Application definition
@@ -83,15 +83,18 @@ WSGI_APPLICATION = 'backend_api.wsgi.application'
 #     }
 # }
 
-# DATABASES = 'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@mainline.proxy.rlwy.net:39208/railway'
+DATABASE_URL = "postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@postgres.railway.internal:5432/railway"
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@postgres.railway.internal:5432/railway',
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
 }
+# DATABASES = {
+#     'default': dj_database_url.parse(
+#         'postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@postgres.railway.internal:5432/railway',
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -123,6 +126,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
