@@ -28,3 +28,4 @@ dj-database-url
 solana
 pynacl
 django-cloudinary-storage
+python-decouple
