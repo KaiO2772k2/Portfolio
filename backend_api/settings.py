@@ -56,6 +56,14 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Hoặc chỉ cho phép các nguồn cụ thể
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173/",  # React dev server
+    "https://your-frontend-domain.com",
+]
+
 ROOT_URLCONF = 'backend_api.urls'
 
 TEMPLATES = [
