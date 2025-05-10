@@ -35,9 +35,10 @@ class ProjectMVS(viewsets.ModelViewSet):
         try:
             serializer = ProjectSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                model = serializer.add(request)
+                if model:
+                    return Response({"message": "Project added successfully"}, status=status.HTTP_201_CREATED)
+                return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Exception as error:
             print("add_project_api_error: ", error)
             return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
