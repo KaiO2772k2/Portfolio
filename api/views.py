@@ -42,3 +42,29 @@ class ProjectMVS(viewsets.ModelViewSet):
         except Exception as error:
             print("add_project_api_error: ", error)
             return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class LanguageMVS(viewsets.ModelViewSet):
+    serializer_class = LanguageSerializer 
+
+    @action(detail=False, methods=['GET'], url_name='get_all_languages_api', url_path='get_all_languages_api')
+    def get_all_languages_api(self, request):
+        try:
+            languages = Language.objects.all()
+            serializer = LanguageSerializer(languages, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as error:
+            print("get_all_languages_api_error: ", error)
+            return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    @action(detail=False, methods=['POST'], url_name='add_language_api', url_path='add_language_api')
+    def add_language_api(self, request):
+        try:
+            serializer = LanguageSerializer(data=request.data)
+            if serializer.is_valid():
+                model = serializer.add(request)
+                if model:
+                    return Response({"message": "Language added successfully"}, status=status.HTTP_201_CREATED)
+                return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as error:
+            print("add_language_api_error: ", error)
+            return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
