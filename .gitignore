@@ -49,7 +49,7 @@ Thumbs.db
 **/__pycache__/
 
 # /Hope_Horizon_api
-backend_api/.env
+.env
 # backend_api/static
 backend_api/media
 backend_api/protected
