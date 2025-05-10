@@ -13,10 +13,12 @@ class ProjectSerializer(serializers.ModelSerializer):
             name = request.data['name']
             image = request.data['image']
             description = request.data['description']
+            link = request.data['link']
             return Project.objects.create(
                 name=name,
                 image=image,
                 description=description
+                link=link
             )
         except Exception as error:
             print("ProjectSerializer_add_error: ", error)
@@ -38,10 +40,12 @@ class ProjectSerializer(serializers.ModelSerializer):
             name = request.data['name']
             image = request.data['image']
             description = request.data['description']
+            link = request.data['link']
             project = Project.objects.get(id=id)
             project.name = name
             project.image = image
             project.description = description
+            project.link = link
             project.save()
             return True
         except Exception as error:
