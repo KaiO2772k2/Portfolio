@@ -20,20 +20,20 @@ from .serializers import *
 class ProjectMVS(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer 
 
+    def get_queryset(self):
+        return Project.objects.all()
+
     @action(detail=False, methods=['GET'], url_name='get_all_projects_api', url_path='get_all_projects_api')
     def get_all_projects_api(self, request):
-        try:
-            projects = Project.objects.all()
-            serializer = ProjectSerializer(projects, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Exception as error:
-            print("get_all_projects_api_error: ", error)
-            return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        queryset = Project.objects.all()
+        
+        serializers = self.serializer_class(queryset, many=True)
+        return Response(data=serializers.data, status=status.HTTP_200_OK)
         
     @action(detail=False, methods=['POST'], url_name='add_project_api', url_path='add_project_api')
     def add_project_api(self, request):
         try:
-            serializer = ProjectSerializer(data=request.data)
+            serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 model = serializer.add(request)
                 if model:
@@ -50,7 +50,7 @@ class LanguageMVS(viewsets.ModelViewSet):
     def get_all_languages_api(self, request):
         try:
             languages = Language.objects.all()
-            serializer = LanguageSerializer(languages, many=True)
+            serializer = self.serializer_class(languages, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as error:
             print("get_all_languages_api_error: ", error)
@@ -59,7 +59,7 @@ class LanguageMVS(viewsets.ModelViewSet):
     @action(detail=False, methods=['POST'], url_name='add_language_api', url_path='add_language_api')
     def add_language_api(self, request):
         try:
-            serializer = LanguageSerializer(data=request.data)
+            serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 model = serializer.add(request)
                 if model:
