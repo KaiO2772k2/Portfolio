@@ -65,11 +65,19 @@ class LanguageSerializer(serializers.ModelSerializer):
     def add(self, request):
         try: 
             name = request.data['name']
-            project_id = request.data['project_id']
+            project_id = request.data['project']  # Lấy ID của project từ dữ liệu
+            project = Project.objects.get(id=project_id)  # Lấy đối tượng Project từ ID
+
             return Language.objects.create(
                 name=name,
-                project_id=project_id
+                project=project
             )
+        except KeyError as e:
+            print(f"LanguageSerializer_add_error: Missing field {e}")
+            return None
+        except Project.DoesNotExist:
+            print("LanguageSerializer_add_error: Project does not exist")
+            return None
         except Exception as error:
             print("LanguageSerializer_add_error: ", error)
             return None

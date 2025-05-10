@@ -42,6 +42,22 @@ class ProjectMVS(viewsets.ModelViewSet):
         except Exception as error:
             print("add_project_api_error: ", error)
             return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['GET'], url_name='get_projects_by_language', url_path='get_projects_by_language')
+    def get_projects_by_language(self, request):
+        try:
+            # Lấy danh sách các `language_id` từ query params
+            language_ids = request.query_params.getlist('language_ids', [])
+            
+            # Lọc các project có liên kết với các `language_id` được cung cấp
+            projects = Project.objects.filter(languages__id__in=language_ids).distinct()
+            
+            # Serialize dữ liệu
+            serializer = self.serializer_class(projects, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as error:
+            print("get_projects_by_language_error: ", error)
+            return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 class LanguageMVS(viewsets.ModelViewSet):
     serializer_class = LanguageSerializer 
@@ -65,6 +81,9 @@ class LanguageMVS(viewsets.ModelViewSet):
                 if model:
                     return Response({"message": "Language added successfully"}, status=status.HTTP_201_CREATED)
                 return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            else:
+                # Trả về lỗi nếu dữ liệu không hợp lệ
+                return Response({"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as error:
             print("add_language_api_error: ", error)
             return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
