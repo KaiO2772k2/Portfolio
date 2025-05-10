@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from api.models import *
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class ProjectSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
+    parser_classes = [MultiPartParser, FormParser] 
 
     class Meta:
         model = Project

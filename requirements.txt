@@ -27,3 +27,4 @@ whitenoise
 dj-database-url
 solana
 pynacl
+django-cloudinary-storage

@@ -1,10 +1,11 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
 class Project(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='projects/')
+    image = CloudinaryField('image')
     description = models.TextField()
     link = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
