@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'backend_api.wsgi.application'
 #     }
 # }
 
-DATABASE_URL = "postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@postgres.railway.internal:5432/railway"
+DATABASE_URL = "postgresql://postgres:qMbmASdKksvRpLXATYLPfGBDalDwRSTp@mainline.proxy.rlwy.net:39208/railway"
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
