@@ -165,3 +165,9 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': config('CLOUDINARY_API_SECRET'),
     'SECURE': True
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://api-cv-tranvannghia.up.railway.app",
+    "https://cv-tranvannghia.up.railway.app",
+    "http://localhost:5173"
+]
