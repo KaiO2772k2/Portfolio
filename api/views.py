@@ -17,6 +17,42 @@ from .serializers import *
 
 # Create your views here.
 
+from rest_framework.decorators import api_view
+from django.core.mail import send_mail
+from django.conf import settings
+
+@api_view(['POST'])
+def contact_view(request):
+    data = request.data
+    first_name = data.get('firstName')
+    last_name = data.get('lastName')
+    email = data.get('email')
+    subject = data.get('subject')
+    message = data.get('message')
+
+    if not all([first_name, last_name, email, subject, message]):
+        return Response({'error': 'Missing fields'}, status=status.HTTP_400_BAD_REQUEST)
+
+    full_message = f"""
+    From: {first_name} {last_name} <{email}>
+    
+    Message:
+    {message}
+    """
+
+    try:
+        send_mail(
+            subject=subject,
+            message=full_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=['nghiatran1527@gmail.com'],
+            fail_silently=False,
+        )
+        return Response({'success': 'Email sent'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class ProjectMVS(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer 
 

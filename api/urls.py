@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import *
 from . import views
+from .views import contact_view
 
 get_all_projects_api = ProjectMVS.as_view({
     'get': 'get_all_projects_api'
@@ -29,4 +30,5 @@ urlpatterns = [
     path('get_all_languages_api/', get_all_languages_api, name='get_all_languages_api'),
     path('add_language_api/', add_language_api, name='add_language_api'), 
     path('get_projects_by_language/', get_all_with_languages, name='get_projects_by_language'),
+    path('contact/', contact_view),
 ]
