@@ -90,8 +90,8 @@ class ProjectMVS(viewsets.ModelViewSet):
             return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
     @action(detail=False, methods=['GET'], url_name='get_all_with_ids', url_path='get_all_with_ids')
-    def get_all_with_ids(self, request):
-        project_id = request.query_params.get('id')
+    def get_all_with_ids(self, request, *args, **kwargs):
+        project_id = kwargs['id']
         if not project_id:
             return Response({"error": "No id provided"}, status=status.HTTP_400_BAD_REQUEST)
         try:
