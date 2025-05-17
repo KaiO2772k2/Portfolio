@@ -5,6 +5,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 class ProjectDetailSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
     project_id = serializers.IntegerField(required=False)
+    features = serializers.SerializerMethodField()
 
     class Meta:
         model = ProjectDetail
