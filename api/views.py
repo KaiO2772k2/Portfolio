@@ -89,6 +89,15 @@ class ProjectMVS(viewsets.ModelViewSet):
             print("get_all_with_languages_error:", error)
             return Response({"error": "Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+    @action(detail=False, methods=['GET'], url_name='get_all_with_ids', url_path='get_all_with_ids')
+    def get_all_with_ids(self, request):
+        ids = request.query_params.getlist('ids', [])
+        if not ids:
+            return Response({"error": "No ids provided"}, status=status.HTTP_400_BAD_REQUEST)
+        projects = self.get_queryset().filter(id__in=ids)
+        serializer = self.get_serializer(projects, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
 class LanguageMVS(viewsets.ModelViewSet):
     serializer_class = LanguageSerializer 
 
