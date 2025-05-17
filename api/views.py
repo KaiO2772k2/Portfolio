@@ -91,12 +91,15 @@ class ProjectMVS(viewsets.ModelViewSet):
         
     @action(detail=False, methods=['GET'], url_name='get_all_with_ids', url_path='get_all_with_ids')
     def get_all_with_ids(self, request):
-        ids = request.query_params.getlist('ids', [])
-        if not ids:
-            return Response({"error": "No ids provided"}, status=status.HTTP_400_BAD_REQUEST)
-        projects = self.get_queryset().filter(id__in=ids)
-        serializer = self.get_serializer(projects, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        project_id = request.query_params.get('id')
+        if not project_id:
+            return Response({"error": "No id provided"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            project = self.get_queryset().get(id=project_id)
+            serializer = self.get_serializer(project)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
         
 class LanguageMVS(viewsets.ModelViewSet):
     serializer_class = LanguageSerializer 

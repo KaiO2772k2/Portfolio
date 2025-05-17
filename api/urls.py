@@ -35,5 +35,5 @@ urlpatterns = [
     path('add_language_api/', add_language_api, name='add_language_api'), 
     path('get_projects_by_language/', get_all_with_languages, name='get_projects_by_language'),
     path('contact/', contact_view),
-    path('get_all_with_ids/', get_all_with_ids, name='get_all_with_ids'),
+    path('get_all_with_ids/<int:id>/', get_all_with_ids, name='get_all_with_ids'),
 ]
