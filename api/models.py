@@ -22,3 +22,17 @@ class Language(models.Model):
 
     def __str__(self):
         return self.name
+    
+class ProjectDetail(models.Model):
+    name_type = models.CharField(max_length=100)
+    date = models.CharField(max_length=100)
+    description_long = models.TextField()
+    link_be = models.TextField(null=True, blank=True)
+    link_fe = models.TextField(null=True, blank=True)
+    features = models.TextField(null=True, blank=True)
+    project = models.ForeignKey(Project, related_name='project_details', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name

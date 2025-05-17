@@ -2,6 +2,13 @@ from rest_framework import serializers
 from api.models import *
 from rest_framework.parsers import MultiPartParser, FormParser
 
+class ProjectDetailSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False)
+    project_id = serializers.IntegerField(required=False)
+
+    class Meta:
+        model = ProjectDetail
+        fields = ['id', 'name_type', 'date', 'description_long', 'link_be', 'link_fe', 'features', 'project_id']
 
     
 class LanguageSerializer(serializers.ModelSerializer):
@@ -58,11 +65,12 @@ class LanguageSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
     languages = LanguageSerializer(many=True, read_only=True)
+    project_details = ProjectDetailSerializer(many=True, read_only=True)
     parser_classes = [MultiPartParser, FormParser] 
 
     class Meta:
         model = Project
-        fields = ['id', 'name', 'image', 'description', 'link', 'created_at', 'updated_at', 'languages']
+        fields = ['id', 'name', 'image', 'description', 'link', 'created_at', 'updated_at', 'languages', 'project_details']
 
     def add(self, request):
         try: 
