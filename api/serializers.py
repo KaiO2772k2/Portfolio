@@ -10,6 +10,11 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
         model = ProjectDetail
         fields = ['id', 'name_type', 'date', 'description_long', 'link_be', 'link_fe', 'features', 'project_id']
 
+    def get_features(self, obj):
+        raw_features = obj.features  # lấy chuỗi "PostgreSQL Database - JWT Authentication - ..."
+        feature_list = [f.strip() for f in raw_features.split(' - ') if f.strip()]
+        return [{"id": i + 1, "name": name} for i, name in enumerate(feature_list)]
+
     
 class LanguageSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
