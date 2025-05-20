@@ -76,7 +76,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['id', 'name', 'image', 'description', 'link', 'created_at', 'updated_at', 'languages', 'project_details']
+        fields = ['id', 'name', 'image', 'description', 'link', 'created_at', 'updated_at', 'languages', 'project_details', 'description_vn']
 
     def add(self, request):
         try: 
