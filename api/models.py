@@ -7,6 +7,7 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     image = CloudinaryField('image')
     description = models.TextField()
+    description_vn = models.TextField(null=True, blank=True)
     link = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
