@@ -28,6 +28,7 @@ class ProjectDetail(models.Model):
     name_type = models.CharField(max_length=100)
     date = models.CharField(max_length=100)
     description_long = models.TextField()
+    description_long_vn = models.TextField(null=True, blank=True)
     link_be = models.TextField(null=True, blank=True)
     link_fe = models.TextField(null=True, blank=True)
     link_youtube = models.TextField(null=True, blank=True)
