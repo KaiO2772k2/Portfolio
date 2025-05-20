@@ -9,7 +9,7 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProjectDetail
-        fields = ['id', 'name_type', 'date', 'description_long', 'link_be', 'link_fe', 'features', 'project_id']
+        fields = ['id', 'name_type', 'date', 'description_long', 'link_be', 'link_fe', 'features', 'project_id', 'link_youtube', 'description_long_vn']
 
     def get_features(self, obj):
         raw_features = obj.features  # lấy chuỗi "PostgreSQL Database - JWT Authentication - ..."
