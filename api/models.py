@@ -29,6 +29,7 @@ class ProjectDetail(models.Model):
     description_long = models.TextField()
     link_be = models.TextField(null=True, blank=True)
     link_fe = models.TextField(null=True, blank=True)
+    link_youtube = models.TextField(null=True, blank=True)
     features = models.TextField(null=True, blank=True)
     project = models.ForeignKey(Project, related_name='project_details', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
