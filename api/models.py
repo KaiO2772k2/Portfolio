@@ -27,6 +27,7 @@ class Language(models.Model):
 class ProjectDetail(models.Model):
     name_type = models.CharField(max_length=100)
     date = models.CharField(max_length=100)
+    date_vn = models.CharField(max_length=100, null=True, blank=True)
     description_long = models.TextField()
     description_long_vn = models.TextField(null=True, blank=True)
     link_be = models.TextField(null=True, blank=True)
